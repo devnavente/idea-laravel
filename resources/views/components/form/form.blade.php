@@ -8,5 +8,5 @@
     @csrf
     {{ $slot }}
 
-    <button type="submit" class="btn btn-primary">{{ $submit }}</button>
+    <button type="submit" class="btn btn-primary" data-test="submit">{{ $submit }}</button>
 </form>
