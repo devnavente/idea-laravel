@@ -5,11 +5,15 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SessionsController;
+use App\Http\Controllers\IdeaController;
 
-Route::get('/', fn () => view('welcome'));
+Route::redirect('/', '/ideas');
 
 Route::middleware('auth')->group(function () {
     Route::delete('/logout', [SessionsController::class, 'destroy']);
+
+    Route::get('/ideas', [IdeaController::class, 'index']);
+    Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('idea.show');
 });
 
 Route::middleware('guest')->group(function () {
