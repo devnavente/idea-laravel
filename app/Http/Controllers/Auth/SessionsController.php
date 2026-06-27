@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -9,31 +11,35 @@ use Illuminate\Validation\Rules\Password;
 
 class SessionsController extends Controller
 {
-    function create() {
+    public function create()
+    {
         return view('auth.login');
     }
 
-    function store(Request $request) {
+    public function store(Request $request)
+    {
         $validated = $request->validate([
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', Password::default()]
+            'password' => ['required', Password::default()],
         ]);
 
-        if (!Auth::attempt($validated)) {
+        if (! Auth::attempt($validated)) {
             return back()->withErrors([
-                'password' => 'The credentials you entered did not match our records.'
+                'password' => 'The credentials you entered did not match our records.',
             ])->withInput();
         }
 
         $request->session()->regenerate();
+
         return redirect()->intended('/')->with('success', 'You logged in!');
     }
 
-    function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
         Auth::logout();
 
-        //$request->session()->invalidate();
-        //$request->session()->regenerateToken();
+        // $request->session()->invalidate();
+        // $request->session()->regenerateToken();
 
         return redirect('/')->with('success', 'You have been logged out!');
     }

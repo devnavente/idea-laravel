@@ -6,6 +6,16 @@
         </div>
 
         <div class="mt-10">
+            <div class="mb-10">
+                <a href="/" class="btn {{ request('status') ? 'btn-outlined' : '' }}">All
+                    ({{ $statusCount->get('all') }})</a>
+                @foreach (App\IdeaStatus::cases() as $status)
+                    <a href="/ideas?status={{ $status->value }}"
+                        class="btn {{ request('status') === $status->value ? '' : 'btn-outlined' }}">{{ $status->label() }}
+                        ({{ $statusCount->get($status->value) }})
+                    </a>
+                @endforeach
+            </div>
             <div class="grid md:grid-cols-2 gap-6 text-muted-foreground">
                 @forelse($ideas as $idea)
                     <x-card>
