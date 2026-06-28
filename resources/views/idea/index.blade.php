@@ -20,7 +20,7 @@
                 @forelse($ideas as $idea)
                     <x-card>
                         <h2 class="text-foreground text-lg">
-                            <a href="route('idea.show', $ideaa)">{{ $idea->title }}</a>
+                            <a href="{{ route('idea.show', $idea) }}">{{ $idea->title }}</a>
                         </h2>
                         <div class="mt-1">
                             <x-status-label status="{{ $idea->status }}">
