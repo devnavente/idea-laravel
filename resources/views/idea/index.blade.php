@@ -5,6 +5,14 @@
             <p class="text-muted-foreground text-sm mt-2">Capture your thoughts</p>
         </div>
 
+        <div>
+            <button class="underline" x-data @click="$dispatch('open-modal', 'create-idea')">Add idea</button>
+        </div>
+
+        <x-modal name="create-idea" title="New idea">
+            <p>Slot content</p>
+        </x-modal>
+
         <div class="mt-10">
             <div class="mb-10">
                 <a href="/" class="btn {{ request('status') ? 'btn-outlined' : '' }}">All
